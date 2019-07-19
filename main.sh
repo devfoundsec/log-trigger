@@ -12,7 +12,7 @@ cd "$here"
 origin_log="$1"
 
 # Run Check and trigger
-export buff="$(diff $origin_log $tmp_log)"
+export buff="$(tail -n $(grep -v -f $tmp_log $origin_log | wc -l) $origin_log)"
 if [ "$buff" != "" ]
 then 
     bash ./run.sh "$buff"
